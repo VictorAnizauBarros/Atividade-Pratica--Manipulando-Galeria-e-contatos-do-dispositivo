@@ -1,5 +1,6 @@
 import React , {useEffect, useState} from 'react';
 import {View, Text, FlatList, Button, Alert, StyleSheet} from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import * as Contacts from 'expo-contacts';
 
 //Define componente funcional 
@@ -50,16 +51,19 @@ const ContactsComponent = () =>{
 
            {/* Lista de números de telefone do contato */}
            {item.PhoneNumbers && item.PhoneNumbers.map((phone, index)=>(
-            <Text key={index} style={styles.contactDetail}>
-                📞 {phone.number}
-            </Text>
+            <View key={index} style={styles.contactDetailContainer}>
+                <FontAwesome name='phone' size={16} color={'#555'} style={styles.icon}/>
+                <Text style={styles.contactDetail}>{phone.number}</Text>
+            </View>
+            
            ))}
 
            {/* Lista de emails do contato */}
            {item.emails && item.emails.map((email,index)=>(
-            <Text key={index} style={styles.contactDetail}>
-                📧 {email.email}
-            </Text>
+            <View key={index} style={styles.contactDetailContainer}>
+                <FontAwesome name='envelope' size={16} color={'#555'} style={styles.icon}/>
+                <Text style={styles.contactDetail}>{email.email}</Text>
+            </View>
            ))}
         </View>
     );
@@ -104,6 +108,14 @@ const styles = StyleSheet.create({
         fontSize:14,
         color:'#555',
         marginTop:5,
+    },
+    contactDetailContainer:{
+        flexDirection:'row',
+        alignItems:'center',
+        marginTop: 5,
+    },
+    icon:{
+        marginRight:10,
     },
 })
 
